@@ -4,7 +4,7 @@ import AppContext from '../../../appContext/AppContext';
 import TasksProvider from '../../../components/tasks/tasksProvider/TasksProvider';
 import { ITasksProps } from './ITasksProps';
 
-export const ToDoListsApp: React.FunctionComponent<ITasksProps> = (props) => {
+export const TasksApp: React.FunctionComponent<ITasksProps> = (props) => {
   return (
     <AppContext.Provider value={props.appContext}>
       <TasksProvider />
@@ -12,4 +12,4 @@ export const ToDoListsApp: React.FunctionComponent<ITasksProps> = (props) => {
   );
 };
 
-export default ToDoListsApp;
+export default TasksApp;
