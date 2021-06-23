@@ -30,7 +30,13 @@ const TaskEditor: FunctionComponent<ITaskEditorProps> = (props) => {
     <div>
       <TextField label='Task' value={changedTask.title} onChange={event => onChangeTask((event.target as any).value, 'title')} />
       <Dropdown label='Status' options={options} selectedKey={changedTask.status} onChange={(event, item) => onChangeTask(item.text, 'status')} />
-      <DatePicker label='Due Date' value={changedTask.dueDate} onSelectDate={date => onChangeTask(date, 'dueDate')}></DatePicker>
+      <DatePicker label='Due Date'
+        value={changedTask.dueDate}
+        onSelectDate={date => onChangeTask(date, 'dueDate')}
+        formatDate={(date: Date): string =>
+          date.toLocaleDateString()
+        }>
+      </DatePicker>
     </div>
   );
 

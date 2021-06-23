@@ -48,20 +48,20 @@ const TasksViewer: FunctionComponent<ITasksViewerProps> = (props) => {
         compact={true}
         selectionMode={SelectionMode.single}
         selection={onSelectedTaskChanged} />
-      <div>
-        {props.tasks.map((item) => (
-          <div key={item.id}>- {item.id} {item.title}</div>
-        ))}
-      </div>
     </div>);
 
-  function onSelectedTaskChanged(tasks: ITask[]): void {
-    const task = tasks.length > 0 ? tasks[0] : null;
+  function onSelectedTaskChanged(items: ITask[]): void {
+    if (items.length === 0) {
+      props.onSelectedTaskChanged(null);
+      return;
+    }
+    const item = items[0];
+    const task = props.tasks.filter(t => t.id === item.id)[0];
     props.onSelectedTaskChanged(task);
   }
 
-  function onRenderDueDate(item: any): JSX.Element {
-    const task = props.tasks.filter(t => t.id === item.id)[0];
+  function onRenderDueDate(row: any, index: number): JSX.Element {
+    const task = props.tasks[index];
     const date = task.dueDate?.toLocaleDateString();
     return <span>{date}</span>;
   }
