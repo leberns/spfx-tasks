@@ -25,5 +25,7 @@ steps:
     gulp build
     gulp bundle --ship
     gulp package-solution --ship
+
+- script: |
     dir
     dir ./sharepoint/solution
