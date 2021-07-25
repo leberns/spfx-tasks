@@ -20,22 +20,10 @@ steps:
   inputs:
     command: 'install'
 
-- task: gulp@1
-  inputs:
-    arguments: 'clean'
-
-- task: gulp@1
-  inputs:
-    arguments: 'clean'
-
-- task: gulp@1
-  inputs:
-    arguments: 'build'
-
-- task: gulp@1
-  inputs:
-    arguments: 'bundle --ship'
-
-- task: gulp@1
-  inputs:
-    arguments: 'package-solution --ship'
+- script: |
+    gulp clean
+    gulp build
+    gulp bundle --ship
+    gulp package-solution --ship
+    dir
+    dir ./sharepoint/solution
