@@ -8,7 +8,7 @@ trigger:
 
 variables:
   - name: NodeVersion
-    value: 14.x 
+    value: '14.x'
 
 pool:
   vmImage: ubuntu-latest
@@ -16,10 +16,14 @@ pool:
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '14.x'
-  displayName: 'install Node.js'
+    versionSpec: $(NodeVersion)
+  displayName: 'install Node.js $(NodeVersion)'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: Npm@1
+  inputs:
+    command: 'install'
+
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    customCommand: 'run build'
