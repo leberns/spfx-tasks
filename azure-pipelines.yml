@@ -1,4 +1,5 @@
 # SPFx Tasks pipeline
+# https://devblogs.microsoft.com/premier-developer/ci-cd-with-sharepoint-framework-spfx/
 
 trigger:
 - main
@@ -25,7 +26,20 @@ steps:
     gulp build
     gulp bundle --ship
     gulp package-solution --ship
+  displayName: clean build bundle package
 
 - script: |
     dir
     dir ./sharepoint/solution
+
+- task: CopyFiles@2
+  inputs:
+     SourceFolder: '$(Build.SourcesDirectory)/sharepoint/solution'
+     Contents: 'tasks.sppkg'
+     TargetFolder: '$(Build.ArtifactStagingDiretory)/drop'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDiretory)/drop'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
