@@ -27,20 +27,21 @@ steps:
     gulpFile: '$(Build.SourcesDirectory)/gulpfile.js'
     targets: clean
 
-- task: gulp@1
+- task: Gulp@1
   displayName: 'gulp build'
   inputs:
     gulpFile: '$(Build.SourcesDirectory)/gulpfile.js'
     targets: build
 
-- task: gulp@1
-  displayName: 'gulp bundle --ship'
+- task: Gulp@1
+  displayName: 'gulp bundle'
   inputs:
     gulpFile: '$(Build.SourcesDirectory)/gulpfile.js'
     targets: bundle
     arguments: '--ship'
+  continueOnError: true
 
-- task: gulp@1
+- task: Gulp@1
   displayName: 'gulp package-solution --ship'
   inputs:
     gulpFile: '$(Build.SourcesDirectory)/gulpfile.js'
