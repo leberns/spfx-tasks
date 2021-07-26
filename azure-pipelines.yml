@@ -1,5 +1,4 @@
 # SPFx Tasks pipeline
-# https://devblogs.microsoft.com/premier-developer/ci-cd-with-sharepoint-framework-spfx/
 
 trigger:
 - main
@@ -36,7 +35,6 @@ steps:
 - task: Gulp@1
   displayName: 'gulp bundle'
   inputs:
-    gulpFile: '$(Build.SourcesDirectory)/gulpfile.js'
     targets: 'bundle'
     arguments: '--ship'
   continueOnError: true
