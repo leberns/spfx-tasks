@@ -1,0 +1,21 @@
+{
+  "$schema": "https://aka.ms/sppnp-extract-configuration-schema",
+  "handlers": [
+    "Fields",
+    "ContentTypes",
+    "Lists",
+    "RegionalSettings",
+    "Pages"
+  ],
+  "lists": {
+    "lists": [
+      {
+        "title": "Tasks",
+        "removeExistingContentTypes": true
+      }
+    ]
+  },
+  "pages": {
+    "includeAllClientSidePages": true
+  }
+}
