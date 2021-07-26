@@ -21,12 +21,38 @@ steps:
   inputs:
     command: 'install'
 
-- script: |
-    gulp clean
-    gulp build
-    gulp bundle --ship
-    gulp package-solution --ship
-  displayName: clean build bundle package
+- task: gulp@1
+  displayName: 'gulp clean'
+  inputs:
+    gulpFile: '$(Build.SourcesDirectory)/gulpfile.js'
+    targets: clean
+
+- task: gulp@1
+  displayName: 'gulp build'
+  inputs:
+    gulpFile: '$(Build.SourcesDirectory)/gulpfile.js'
+    targets: build
+
+- task: gulp@1
+  displayName: 'gulp bundle --ship'
+  inputs:
+    gulpFile: '$(Build.SourcesDirectory)/gulpfile.js'
+    targets: bundle
+    arguments: '--ship'
+
+- task: gulp@1
+  displayName: 'gulp package-solution --ship'
+  inputs:
+    gulpFile: '$(Build.SourcesDirectory)/gulpfile.js'
+    targets: 'package-solution'
+    arguments: '--ship'
+
+#- script: |
+#    gulp clean
+#    gulp build
+#    gulp bundle --ship
+#    gulp package-solution --ship
+#  displayName: clean build bundle package
 
 - script: |
     dir
@@ -42,4 +68,3 @@ steps:
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDiretory)/drop'
     ArtifactName: 'drop'
-    publishLocation: 'Container'
