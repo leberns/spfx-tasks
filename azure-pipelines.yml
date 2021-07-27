@@ -67,7 +67,6 @@ steps:
 - script: |
     dir
     dir ./sharepoint/solution
-    dir $(Build.ArtifactStagingDiretory)/drop
   displayName: 'List files'
 
 - task: PublishBuildArtifacts@1
