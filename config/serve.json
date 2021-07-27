@@ -8,7 +8,7 @@
   },
   "serveConfigurations": {
     "default": {
-      "pageUrl": "https://adessoleandrobernsmueller.sharepoint.com/sites/lab-1-modern/SitePages/Tasks.aspx",
+      "pageUrl": "https://adessoleandrobernsmueller.sharepoint.com/sites/tasks-dev/SitePages/Tasks.aspx",
       "customActions": {}
     }
   }

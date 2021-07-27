@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<pnp:Provisioning xmlns:pnp="http://schemas.dev.office.com/PnP/2021/03/ProvisioningSchema">
+  <pnp:Preferences Generator="PnP.Framework, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null" />
+  <pnp:Templates ID="CONTAINER-TEMPLATE-67B37EEEA647450097009B92746478FC">
+    <pnp:ProvisioningTemplate ID="TEMPLATE-67B37EEEA647450097009B92746478FC" Version="1" BaseSiteTemplate="GROUP#0" Scope="RootSite">
+      <pnp:RegionalSettings AdjustHijriDays="0" AlternateCalendarType="None" CalendarType="Gregorian" Collation="25" FirstDayOfWeek="Monday" FirstWeekOfYear="1" LocaleId="2055" ShowWeeks="false" Time24="true" TimeZone="4" WorkDayEndHour="5:00PM" WorkDays="62" WorkDayStartHour="8:00AM" />
+      <pnp:SiteFields>
+        <Field Type="Choice" DisplayName="Item Status" Required="TRUE" EnforceUniqueValues="FALSE" Indexed="FALSE" Format="Dropdown" FillInChoice="FALSE" Group="_Tasks" ID="{81b60437-1585-445a-974e-1d203f90d377}" SourceID="{529b2d79-84a6-4a55-b8b9-6a0039c6a728}" StaticName="lbItemStatus" Name="lbItemStatus" CustomFormatter="">
+          <Default>Open</Default>
+          <CHOICES>
+            <CHOICE>Open</CHOICE>
+            <CHOICE>Working</CHOICE>
+            <CHOICE>Completed</CHOICE>
+            <CHOICE>Canceled</CHOICE>
+          </CHOICES>
+        </Field>
+        <Field Type="User" DisplayName="Assigned User" List="UserInfo" Required="FALSE" EnforceUniqueValues="FALSE" ShowField="Title" UserSelectionMode="PeopleOnly" UserSelectionScope="0" Group="_Tasks" ID="{0af0e267-c0d3-404c-a904-87ba7fd25db1}" SourceID="{{siteid}}" StaticName="lbAssignedUser" Name="lbAssignedUser" />
+        <Field Type="DateTime" DisplayName="Task Due" Required="FALSE" EnforceUniqueValues="FALSE" Indexed="FALSE" Format="DateTime" Group="_Tasks" FriendlyDisplayFormat="Disabled" ID="{2edeaf76-9a57-4f66-9081-258d57f59049}" SourceID="{529b2d79-84a6-4a55-b8b9-6a0039c6a728}" StaticName="lbDueDate" Name="lbDueDate" CustomFormatter="" CalType="0">
+          <DefaultFormula>=[TODAY]+1</DefaultFormula>
+        </Field>
+      </pnp:SiteFields>
+      <pnp:ContentTypes>
+        <pnp:ContentType ID="0x0100C3E439E6B2DE8E46B7FD5F2FA0B416AE" Name="Task Item" Description="" Group="_Tasks" NewFormUrl="" EditFormUrl="" DisplayFormUrl="" UpdateChildren="false">
+          <pnp:FieldRefs>
+            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="81b60437-1585-445a-974e-1d203f90d377" Name="lbItemStatus" Required="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="2edeaf76-9a57-4f66-9081-258d57f59049" Name="lbDueDate" UpdateChildren="true" />
+            <pnp:FieldRef ID="0af0e267-c0d3-404c-a904-87ba7fd25db1" Name="lbAssignedUser" UpdateChildren="true" />
+            <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" UpdateChildren="true" />
+          </pnp:FieldRefs>
+        </pnp:ContentType>
+      </pnp:ContentTypes>
+      <pnp:Lists>
+        <pnp:ListInstance Title="Tasks" Description="" DocumentTemplate="" OnQuickLaunch="true" TemplateType="100" Url="Lists/tasks" EnableVersioning="true" MinorVersionLimit="0" MaxVersionLimit="50" DraftVersionVisibility="0" RemoveExistingContentTypes="true" TemplateFeatureID="00bfea71-de22-43b2-a848-c05709900100" ContentTypesEnabled="true" EnableAttachments="false" EnableFolderCreation="false" DefaultDisplayFormUrl="{site}/Lists/tasks/DispForm.aspx" DefaultEditFormUrl="{site}/Lists/tasks/EditForm.aspx" DefaultNewFormUrl="{site}/Lists/tasks/NewForm.aspx" ImageUrl="/_layouts/15/images/itgen.png?rev=47" IrmExpire="false" IrmReject="false" IsApplicationList="false" ValidationFormula="" ValidationMessage="">
+          <pnp:ContentTypeBindings>
+            <pnp:ContentTypeBinding ContentTypeID="0x0100C3E439E6B2DE8E46B7FD5F2FA0B416AE" Default="true" />
+            <pnp:ContentTypeBinding ContentTypeID="0x0120" />
+          </pnp:ContentTypeBindings>
+          <pnp:Views>
+            <View Name="{9A3F007F-F643-4F74-BEBC-5788BCB550E5}" DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" Type="HTML" DisplayName="All Items" Url="{site}/Lists/tasks/AllItems.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/generic.png?rev=47">
+              <Query>
+                <OrderBy>
+                  <FieldRef Name="lbDueDate" />
+                </OrderBy>
+              </Query>
+              <ViewFields>
+                <FieldRef Name="LinkTitle" />
+                <FieldRef Name="lbDueDate" />
+                <FieldRef Name="lbItemStatus" />
+                <FieldRef Name="lbAssignedUser" />
+              </ViewFields>
+              <RowLimit Paged="TRUE">30</RowLimit>
+              <Aggregations Value="Off" />
+              <JSLink>clienttemplates.js</JSLink>
+              <ViewData />
+            </View>
+          </pnp:Views>
+          <pnp:FieldRefs>
+            <pnp:FieldRef ID="81b60437-1585-445a-974e-1d203f90d377" Name="lbItemStatus" Required="true" DisplayName="Item Status" />
+            <pnp:FieldRef ID="2edeaf76-9a57-4f66-9081-258d57f59049" Name="lbDueDate" DisplayName="Task Due" />
+            <pnp:FieldRef ID="0af0e267-c0d3-404c-a904-87ba7fd25db1" Name="lbAssignedUser" DisplayName="Assigned User" />
+          </pnp:FieldRefs>
+          <pnp:Webhooks>
+            <pnp:Webhook ServerNotificationUrl="https://westeurope0.pushnp.svc.ms/notifications?token=2da93cb6-9955-4e8c-9136-142df6c0a568" ExpiresInDays="1" />
+          </pnp:Webhooks>
+        </pnp:ListInstance>
+      </pnp:Lists>
+      <pnp:ClientSidePages>
+        <pnp:ClientSidePage PromoteAsNewsArticle="false" PromoteAsTemplate="false" Overwrite="true" EnableComments="false" Title="Tasks" ThumbnailUrl="" PageName="Tasks.aspx">
+          <pnp:Header Type="Default" LayoutType="NoImage" ShowTopicHeader="false" ShowPublishDate="false" TopicHeader="" AlternativeText="" Authors="[{&quot;id&quot;:&quot;i:0#.f|membership|leandrob@adessoleandrobernsmueller.onmicrosoft.com&quot;,&quot;upn&quot;:&quot;LeandroB@adessoleandrobernsmueller.onmicrosoft.com&quot;,&quot;email&quot;:&quot;LeandroB@adessoleandrobernsmueller.onmicrosoft.com&quot;,&quot;name&quot;:&quot;Leandro Bernsmueller&quot;,&quot;role&quot;:&quot;&quot;}]" AuthorByLine="[&quot;i:0#.f|membership|leandrob@adessoleandrobernsmueller.onmicrosoft.com&quot;]" AuthorByLineId="11" />
+        </pnp:ClientSidePage>
+      </pnp:ClientSidePages>
+    </pnp:ProvisioningTemplate>
+  </pnp:Templates>
+</pnp:Provisioning>

@@ -18,7 +18,14 @@ export class ListItemToEntityMapper<TEntity> implements IEntityMapper<TEntity> {
     for (const internalName of internalNames) {
       const fieldValue = listItem[internalName];
       const propertyName = this.internalNameToPropertyName[internalName];
-      entity[propertyName] = fieldValue;
+      if (propertyName === undefined) {
+        continue;
+      }
+      if (propertyName === 'dueDate') {
+        entity[propertyName] = new Date(fieldValue) as any;
+      } else {
+        entity[propertyName] = fieldValue;
+      }
     }
 
     return entity;
