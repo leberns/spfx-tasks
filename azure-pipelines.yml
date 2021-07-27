@@ -64,13 +64,14 @@ steps:
        scripts/Deploy-TasksSolution.ps1
      TargetFolder: '$(Build.ArtifactStagingDiretory)/drop'
 
-- script: |
-    dir ./scripts
-    dir ./certificates
-    dir ./sharepoint/solution
-  displayName: 'List files'
-
 - task: PublishPipelineArtifact@1
   inputs:
     targetPath: '$(Build.ArtifactStagingDiretory)/drop'
     artifactName: drop
+
+- script: |
+    dir ./scripts
+    dir ./certificates
+    dir ./sharepoint/solution
+    dir $(Build.ArtifactStagingDiretory)/drop
+  displayName: 'List files'
