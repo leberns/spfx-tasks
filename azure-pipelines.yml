@@ -55,22 +55,23 @@ steps:
 #  displayName: clean build bundle package
 
 - task: CopyFiles@2
-  displayName: 'Copy files to $(build.artifactstagingdirectory)/drop'
+  displayName: 'Copy files to $(Build.ArtifactStagingDirectory)/drop'
   inputs:
      SourceFolder: '$(Build.SourcesDirectory)'
      Contents: |
        sharepoint/solution/tasks.sppkg
        certificates/*.pfx
        scripts/Deploy-TasksSolution.ps1
-     TargetFolder: '$(Build.ArtifactStagingDiretory)/drop'
+     TargetFolder: '$(Build.ArtifactStagingDirectory)/drop'
 
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(Build.ArtifactStagingDiretory)/drop'
+    targetPath: '$(Build.ArtifactStagingDirectory)/drop'
     artifactName: drop
 
 - script: |
     dir ./scripts
     dir ./certificates
     dir ./sharepoint/solution
+    dir BUILD_ARTIFACTSTAGINGDIRECTORY/drop
   displayName: 'List files'
