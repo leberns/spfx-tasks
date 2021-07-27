@@ -54,17 +54,22 @@ steps:
 #    gulp package-solution --ship
 #  displayName: clean build bundle package
 
-- script: |
-    dir
-    dir ./sharepoint/solution
-
 - task: CopyFiles@2
+  displayName: 'Copy files to $(build.artifactstagingdirectory)/drop'
   inputs:
-     SourceFolder: '$(Build.SourcesDirectory)/sharepoint/solution'
-     Contents: 'tasks.sppkg'
+     SourceFolder: '$(Build.SourcesDirectory)'
+     Contents: |
+       'sharepoint/solution/tasks.sppkg'
+       'certificates/*.pfx'
+       'scripts/Deploy-TasksSolution.ps1'
      TargetFolder: '$(Build.ArtifactStagingDiretory)/drop'
 
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDiretory)/drop'
     ArtifactName: 'drop'
+
+- script: |
+    dir
+    dir ./sharepoint/solution
+    dir $(Build.ArtifactStagingDiretory)/drop
