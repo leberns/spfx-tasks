@@ -73,5 +73,4 @@ steps:
     dir ./scripts
     dir ./certificates
     dir ./sharepoint/solution
-    dir $(Build.ArtifactStagingDiretory)/drop
   displayName: 'List files'
