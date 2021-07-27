@@ -59,17 +59,17 @@ steps:
   inputs:
      SourceFolder: '$(Build.SourcesDirectory)'
      Contents: |
-       'sharepoint/solution/tasks.sppkg'
-       'certificates/*.pfx'
-       'scripts/Deploy-TasksSolution.ps1'
+       sharepoint/solution/tasks.sppkg
+       certificates/*.pfx
+       scripts/Deploy-TasksSolution.ps1
      TargetFolder: '$(Build.ArtifactStagingDiretory)/drop'
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDiretory)/drop'
-    ArtifactName: 'drop'
 
 - script: |
     dir
     dir ./sharepoint/solution
     dir $(Build.ArtifactStagingDiretory)/drop
+  displayName: 'List files'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDiretory)/drop'
