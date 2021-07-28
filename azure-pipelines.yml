@@ -63,6 +63,7 @@ steps:
        certificates/*.pfx
        scripts/Deploy-TasksSolution.ps1
      TargetFolder: '$(Build.ArtifactStagingDirectory)/drop'
+     flattenFolders: true
 
 - task: PublishPipelineArtifact@1
   inputs:
@@ -75,7 +76,9 @@ steps:
 - script: dir ./sharepoint/solution
   displayName: 'List sharepoint solution'
 
-- script: dir $DropPath
+- script: |
+    dir $DropPath
+    dir $DropPath/drop
   env:
-    DropPath: '$(Build.ArtifactStagingDirectory)/drop'
+    DropPath: '$(Build.ArtifactStagingDirectory)'
   displayName: 'List drop'
