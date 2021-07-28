@@ -71,7 +71,8 @@ steps:
 
 - script: |
     dir ./scripts
-    dir ./certificates
+  displayName: 'List scripts'
+
+- script: |
     dir ./sharepoint/solution
-    dir $env:BUILD_ARTIFACTSTAGINGDIRECTORY
-  displayName: 'List files'
+  displayName: 'List sharepoint/solution'
