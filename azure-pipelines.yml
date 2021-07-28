@@ -69,10 +69,13 @@ steps:
     targetPath: '$(Build.ArtifactStagingDirectory)/drop'
     artifactName: drop
 
-- script: |
-    dir ./scripts
+- script: dir ./scripts
   displayName: 'List scripts'
 
-- script: |
-    dir ./sharepoint/solution
+- script: dir ./sharepoint/solution
   displayName: 'List sharepoint/solution'
+
+- script: dir %DROPPATH%
+  env:
+    DROPPATH: '$(Build.ArtifactStagingDirectory)/drop'
+  displayName: 'List drop'
