@@ -73,5 +73,5 @@ steps:
     dir ./scripts
     dir ./certificates
     dir ./sharepoint/solution
-    dir %BUILD_ARTIFACTSTAGINGDIRECTORY%
+    dir $env:BUILD_ARTIFACTSTAGINGDIRECTORY
   displayName: 'List files'
