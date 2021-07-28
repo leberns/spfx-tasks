@@ -75,7 +75,7 @@ steps:
 - script: dir ./sharepoint/solution
   displayName: 'List sharepoint solution'
 
-- script: dir %DROPPATH%
+- script: dir $DropPath
   env:
-    DROPPATH: '$(Build.ArtifactStagingDirectory)/drop'
+    DropPath: '$(Build.ArtifactStagingDirectory)/drop'
   displayName: 'List drop'
