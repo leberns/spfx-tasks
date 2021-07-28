@@ -73,7 +73,7 @@ steps:
   displayName: 'List scripts'
 
 - script: dir ./sharepoint/solution
-  displayName: 'List sharepoint/solution'
+  displayName: 'List sharepoint solution'
 
 - script: dir %DROPPATH%
   env:
