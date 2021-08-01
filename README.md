@@ -30,8 +30,8 @@ Version|Date|Comments
 
 ## References
 
-- [Getting started with SharePoint Framework](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-developer-tenant)
-- [Building for Microsoft teams](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/build-for-teams-overview)
-- [Use Microsoft Graph in your solution](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/web-parts/get-started/using-microsoft-graph-apis)
-- [Publish SharePoint Framework applications to the Marketplace](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/publish-to-marketplace-overview)
-- [Microsoft 365 Patterns and Practices](https://aka.ms/m365pnp) - Guidance, tooling, samples and open-source controls for your Microsoft 365 development
+- https://coreyroth.com/2021/01/20/how-to-use-pnp-powershell-to-deploy-sharepoint-apps-with-azure-devops/
+- https://azuredevopslabs.com/labs/vstsextend/azurekeyvault/
+- https://docs.microsoft.com/en-us/sharepoint/dev/general-development/site-collection-app-catalog
+- https://techcommunity.microsoft.com/t5/microsoft-365-pnp-blog/getting-started-with-azure-shell-and-pnp-powershell-with/ba-p/2315482
+
