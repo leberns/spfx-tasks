@@ -60,7 +60,7 @@ steps:
      SourceFolder: '$(Build.SourcesDirectory)'
      Contents: |
        sharepoint/solution/tasks.sppkg
-       certificates/*.pfx
+       template/TasksPnPTemplate.xml
        scripts/Deploy-TasksSolution.ps1
      TargetFolder: '$(Build.ArtifactStagingDirectory)/drop'
      flattenFolders: true
