@@ -33,4 +33,5 @@ Version|Date|Comments
 - https://coreyroth.com/2021/01/20/how-to-use-pnp-powershell-to-deploy-sharepoint-apps-with-azure-devops/
 - https://azuredevopslabs.com/labs/vstsextend/azurekeyvault/
 - https://docs.microsoft.com/en-us/sharepoint/dev/general-development/site-collection-app-catalog
+- https://techcommunity.microsoft.com/t5/microsoft-365-pnp-blog/getting-started-with-azure-shell-and-pnp-powershell-with/ba-p/2315482
 
