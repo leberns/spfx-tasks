@@ -3,13 +3,14 @@
 
 Write-Host "Starting SPFx solution deployment"
 
-Install-Module -Name Az -Force
 Install-Module -Name PnP.PowerShell -Force
 
 $vaultName = "PnPAzureDevOpsVault"
 $certName = "PnPAzureDevOpsPfx"
 $tenant = "adessoleandrobernsmueller.onmicrosoft.com" # $env:tenant
 $clientId = "8c8d1427-6b98-47c6-ab1c-b8812590654a"    # $env:clientId
+$dropPath = "_leberns.spfx-tasks"                     # $env:dropPath
+$spfxSolutionFileName = "tasks.sppkg"                 # $env:spfxSolutionFileName
 $siteUrl = "https://adessoleandrobernsmueller.sharepoint.com/sites/tasks-dev"
 
 $base64Cert = Get-AzKeyVaultSecret -VaultName $vaultName -Name $certName -AsPlainText
@@ -31,10 +32,10 @@ Write-Host "Site: $siteUrl"
 
 Connect-PnPOnline -url $siteUrl -clientId $clientId -Tenant $tenant -CertificateBase64Encoded $base64Cert
 
-$packagePath = "./$($env:dropPath)/drop/$($env:packageName)"
-Write-Host "Package path: $packagePath"
+$solutionPath = "./$dropPath/drop/$($spfxSolutionFileName)"
+Write-Host "SPFx solution path: $solutionPath"
 
-Add-PnPApp $packagePath -Overwrite -Publish
+Add-PnPApp $solutionPath -Overwrite -Publish
 
 $templatePath = "./$($env:dropPath)/drop/$($env:pnpTemplateFileName)"
 Write-Host "Template path: $templatePath"
