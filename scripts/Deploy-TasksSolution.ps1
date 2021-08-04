@@ -34,19 +34,19 @@ Write-Host "Certificate lenght: $($base64Cert.Length)"
 #Write-Host "Certificate path: $certificatePath"
 #Connect-PnPOnline -url $siteUrl -clientId $clientId -Tenant $env:tenant -CertificatePath $certificatePath 
 
-Write-Host "Connecting to the site"
+Write-Host "Connecting to the site..."
 Write-Host "Site: $siteUrl"
 
 Connect-PnPOnline -url $siteUrl -clientId $clientId -Tenant $tenant -CertificateBase64Encoded $base64Cert
 
-Write-Host "Installing the SPFx solution"
+Write-Host "Installing the SPFx solution..."
 
 $solutionPath = "./$dropPath/drop/$($spfxSolutionFileName)"
 Write-Host "SPFx solution path: $solutionPath"
 
 Add-PnPApp $solutionPath -Overwrite -Publish
 
-Write-Host "Applying the PnP template"
+Write-Host "Applying the PnP template..."
 
 $templatePath = "./$($env:dropPath)/drop/$($env:pnpTemplateFileName)"
 Write-Host "Template path: $templatePath"
