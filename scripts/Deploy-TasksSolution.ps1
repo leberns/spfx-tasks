@@ -3,20 +3,24 @@
 
 Write-Host "Starting solution deployment"
 
-Write-Host "Installing PnP PowerShell..."
-
-Install-Module -Name PnP.PowerShell -Force
-
-$deployment = "dev"                                   # $env:deployment
-$siteUrl = "https://adessoleandrobernsmueller.sharepoint.com/sites/tasks-$deployment"
-$tenant = "adessoleandrobernsmueller.onmicrosoft.com" # $env:tenant
-$dropPath = "_leberns.spfx-tasks"                     # $env:dropPath
-$spfxSolutionFileName = "tasks.sppkg"                 # $env:spfxSolutionFileName
+$deployment = $env:deployment
+$siteUrl = "$env:baseSiteUrl-$deployment"
+$tenant = $env:tenant
+$dropPath = $env:dropPath
+$spfxSolutionFileName = $env:spfxSolutionFileName
 $pnpTemplateFileName = $env:pnpTemplateFileName
 $clientId = $env:clientId
 $certificateBase64 = $env:certificateBase64
 
+Write-Host "Deployment:                 $deployment"
+Write-Host "Site URL:                   $siteUrl"
+Write-Host "SPFx solution file name:    $spfxSolutionFileName"
+Write-Host "Template file name:         $pnpTemplateFileName"
 Write-Host "Base 64 certificate lenght: $($certificateBase64.Length)"
+
+Write-Host "Installing PnP PowerShell..."
+
+Install-Module -Name PnP.PowerShell -Force
 
 #$certificatePath = "./$dropPath/drop/$($env:certificateFilename)"
 #Write-Host "Certificate path: $certificatePath"
