@@ -7,10 +7,6 @@ Write-Host "AzureRM versions installed:"
 
 Get-InstalledModule -Name AzureRM -AllVersions -ErrorAction Continue
 
-Write-Host "Uninstalling AzureRM..."
-
-Uninstall-AzureRm -ErrorAction Continue
-
 Write-Host "Az versions installed:"
 
 Get-InstalledModule -Name Az -AllVersions -ErrorAction Continue
@@ -22,6 +18,10 @@ Install-Module -Name Az -Force -AllowClobber
 Write-Host "Az versions installed (2nd check):"
 
 Get-InstalledModule -Name Az -AllVersions -ErrorAction Continue
+
+Write-Host "Uninstalling AzureRM..."
+
+Uninstall-AzureRm -ErrorAction Continue
 
 Write-Host "Installing PnP PowerShell..."
 
