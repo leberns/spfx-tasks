@@ -7,13 +7,17 @@ Write-Host "AzureRM versions installed:"
 
 Get-InstalledModule -Name AzureRM -AllVersions -ErrorAction Continue
 
+Write-Host "Uninstalling AzureRM..."
+
+Uninstall-AzureRm -ErrorAction Continue
+
 Write-Host "Az versions installed:"
 
 Get-InstalledModule -Name Az -AllVersions -ErrorAction Continue
 
 Write-Host "Installing Az..."
 
-Install-Module -Name Az -Scope CurrentUser -Repository PSGallery -Force -AllowClobber
+Install-Module -Name Az -Force -AllowClobber
 
 Write-Host "Az versions installed (2nd check):"
 
@@ -31,6 +35,10 @@ $clientId = "8c8d1427-6b98-47c6-ab1c-b8812590654a"    # $env:clientId
 $dropPath = "_leberns.spfx-tasks"                     # $env:dropPath
 $spfxSolutionFileName = "tasks.sppkg"                 # $env:spfxSolutionFileName
 $siteUrl = "https://adessoleandrobernsmueller.sharepoint.com/sites/tasks-$deployment"
+
+Write-Host "Connecting to Az with -Identity..."
+
+Connect-AzAccount -Identity
 
 Write-Host "Getting certificate..."
 
