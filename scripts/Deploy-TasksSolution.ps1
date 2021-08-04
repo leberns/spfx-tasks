@@ -3,39 +3,50 @@
 
 Write-Host "Starting SPFx solution deployment"
 
+Write-Host "AzureRM versions installed:"
+
+Get-InstalledModule -Name AzureRM -AllVersions
+
+Write-Host "Installing Az..."
+
+Install-Module -Name Az -Scope CurrentUser -Repository PSGallery -Force -AllowClobber
+
+Write-Host "Installing PnP PowerShell..."
+
 Install-Module -Name PnP.PowerShell -Force
 
 $vaultName = "PnPAzureDevOpsVault"
 $certName = "PnPAzureDevOpsPfx"
+$deployment = "dev"                                   # $env:deployment
 $tenant = "adessoleandrobernsmueller.onmicrosoft.com" # $env:tenant
 $clientId = "8c8d1427-6b98-47c6-ab1c-b8812590654a"    # $env:clientId
 $dropPath = "_leberns.spfx-tasks"                     # $env:dropPath
 $spfxSolutionFileName = "tasks.sppkg"                 # $env:spfxSolutionFileName
-$siteUrl = "https://adessoleandrobernsmueller.sharepoint.com/sites/tasks-dev"
+$siteUrl = "https://adessoleandrobernsmueller.sharepoint.com/sites/tasks-$deployment"
+
+Write-Host "Getting certificate..."
 
 $base64Cert = Get-AzKeyVaultSecret -VaultName $vaultName -Name $certName -AsPlainText
 
-Write-Host "Certificate retrieved, lenght: $($base64Cert.Length)"
+Write-Host "Certificate lenght: $($base64Cert.Length)"
 
-#if ($env:environment -eq "development") {
-#  $siteUrl = $env:devSiteUrl
-#}
-#else {
-#  $siteUrl = $env:testSiteUrl
-#}
-
-Write-Host "Site: $siteUrl"
-
-#$certificatePath = "./$($env:dropPath)/drop/$($env:certificateFilename)"
+#$certificatePath = "./$dropPath/drop/$($env:certificateFilename)"
 #Write-Host "Certificate path: $certificatePath"
 #Connect-PnPOnline -url $siteUrl -clientId $clientId -Tenant $env:tenant -CertificatePath $certificatePath 
 
+Write-Host "Connecting to the site"
+Write-Host "Site: $siteUrl"
+
 Connect-PnPOnline -url $siteUrl -clientId $clientId -Tenant $tenant -CertificateBase64Encoded $base64Cert
+
+Write-Host "Installing the SPFx solution"
 
 $solutionPath = "./$dropPath/drop/$($spfxSolutionFileName)"
 Write-Host "SPFx solution path: $solutionPath"
 
 Add-PnPApp $solutionPath -Overwrite -Publish
+
+Write-Host "Applying the PnP template"
 
 $templatePath = "./$($env:dropPath)/drop/$($env:pnpTemplateFileName)"
 Write-Host "Template path: $templatePath"
