@@ -4,4 +4,4 @@
 Register-PnPManagementShellAccess
 
 # register PnPAzureDevOps app in Azure, allow developer user to give consent and generate certificates
-Register-PnPAzureADApp -ApplicationName PnPAzureDevOps -Tenant adessoleandrobernsmueller.onmicrosoft.com -OutPath .\certificates -DeviceLogin
+Register-PnPAzureADApp -ApplicationName PnPAzureDevOps -Tenant adessoleandrobernsmueller.onmicrosoft.com -OutPath ..\certificates -DeviceLogin
