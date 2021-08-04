@@ -1,15 +1,23 @@
 # Deploy the SPFx Tasks client solution and pnp template
-# The PnP connection to the site is made through a certificate
+# The PnP connection to the site is made through a certificate stored in the Azure key vault
 
-Write-Host "Starting SPFx solution deployment"
+Write-Host "Starting solution deployment"
 
 Write-Host "AzureRM versions installed:"
 
-Get-InstalledModule -Name AzureRM -AllVersions
+Get-InstalledModule -Name AzureRM -AllVersions -ErrorAction Continue
+
+Write-Host "Az versions installed:"
+
+Get-InstalledModule -Name Az -AllVersions -ErrorAction Continue
 
 Write-Host "Installing Az..."
 
 Install-Module -Name Az -Scope CurrentUser -Repository PSGallery -Force -AllowClobber
+
+Write-Host "Az versions installed (2nd check):"
+
+Get-InstalledModule -Name Az -AllVersions -ErrorAction Continue
 
 Write-Host "Installing PnP PowerShell..."
 
