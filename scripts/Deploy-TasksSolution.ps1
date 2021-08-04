@@ -3,44 +3,20 @@
 
 Write-Host "Starting solution deployment"
 
-Write-Host "AzureRM versions installed:"
-
-Get-InstalledModule -Name AzureRM -AllVersions -ErrorAction Continue
-
-Write-Host "Installing Az..."
-
-Install-Module -Name Az -Force -AllowClobber
-
-Write-Host "Az versions installed:"
-
-Get-InstalledModule -Name Az -AllVersions -ErrorAction Continue
-
 Write-Host "Installing PnP PowerShell..."
 
 Install-Module -Name PnP.PowerShell -Force
 
-$vaultName = "PnPAzureDevOpsVault"
-$certName = "PnPAzureDevOpsPfx"
 $deployment = "dev"                                   # $env:deployment
+$siteUrl = "https://adessoleandrobernsmueller.sharepoint.com/sites/tasks-$deployment"
 $tenant = "adessoleandrobernsmueller.onmicrosoft.com" # $env:tenant
-$clientId = "8c8d1427-6b98-47c6-ab1c-b8812590654a"    # $env:clientId
 $dropPath = "_leberns.spfx-tasks"                     # $env:dropPath
 $spfxSolutionFileName = "tasks.sppkg"                 # $env:spfxSolutionFileName
-$siteUrl = "https://adessoleandrobernsmueller.sharepoint.com/sites/tasks-$deployment"
+$pnpTemplateFileName = $env:pnpTemplateFileName
+$clientId = $env:clientId
+$certificateBase64 = $env:certificateBase64
 
-$azClientId = $env:azAzureDevOpsClientId
-$azSecret = $env:azAzureDevOpsSecret
-
-Write-Host "Connecting to Az..."
-
-$pscredential = New-Object -TypeName System.Management.Automation.PSCredential($azClientId, $azSecret)
-Connect-AzAccount -ServicePrincipal -Credential $pscredential
-
-Write-Host "Getting certificate..."
-
-$base64Cert = Get-AzKeyVaultSecret -VaultName $vaultName -Name $certName -AsPlainText
-
-Write-Host "Certificate lenght: $($base64Cert.Length)"
+Write-Host "Base 64 certificate lenght: $($certificateBase64.Length)"
 
 #$certificatePath = "./$dropPath/drop/$($env:certificateFilename)"
 #Write-Host "Certificate path: $certificatePath"
@@ -49,7 +25,7 @@ Write-Host "Certificate lenght: $($base64Cert.Length)"
 Write-Host "Connecting to the site..."
 Write-Host "Site: $siteUrl"
 
-Connect-PnPOnline -url $siteUrl -clientId $clientId -Tenant $tenant -CertificateBase64Encoded $base64Cert
+Connect-PnPOnline -url $siteUrl -clientId $clientId -Tenant $tenant -CertificateBase64Encoded $certificateBase64
 
 Write-Host "Installing the SPFx solution..."
 
@@ -60,7 +36,7 @@ Add-PnPApp $solutionPath -Overwrite -Publish
 
 Write-Host "Applying the PnP template..."
 
-$templatePath = "./$($env:dropPath)/drop/$($env:pnpTemplateFileName)"
+$templatePath = "./$($dropPath)/drop/$($pnpTemplateFileName)"
 Write-Host "Template path: $templatePath"
 
 Invoke-PnPSiteTemplate -Path $templatePath
