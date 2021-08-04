@@ -7,21 +7,13 @@ Write-Host "AzureRM versions installed:"
 
 Get-InstalledModule -Name AzureRM -AllVersions -ErrorAction Continue
 
-Write-Host "Az versions installed:"
-
-Get-InstalledModule -Name Az -AllVersions -ErrorAction Continue
-
 Write-Host "Installing Az..."
 
 Install-Module -Name Az -Force -AllowClobber
 
-Write-Host "Az versions installed (2nd check):"
+Write-Host "Az versions installed:"
 
 Get-InstalledModule -Name Az -AllVersions -ErrorAction Continue
-
-Write-Host "Uninstalling AzureRM..."
-
-Uninstall-AzureRm -ErrorAction Continue
 
 Write-Host "Installing PnP PowerShell..."
 
@@ -36,9 +28,13 @@ $dropPath = "_leberns.spfx-tasks"                     # $env:dropPath
 $spfxSolutionFileName = "tasks.sppkg"                 # $env:spfxSolutionFileName
 $siteUrl = "https://adessoleandrobernsmueller.sharepoint.com/sites/tasks-$deployment"
 
-Write-Host "Connecting to Az with -Identity..."
+$azClientId = $env:azAzureDevOpsClientId
+$azSecret = $env:azAzureDevOpsSecret
 
-Connect-AzAccount -Identity
+Write-Host "Connecting to Az..."
+
+$pscredential = New-Object -TypeName System.Management.Automation.PSCredential($azClientId, $azSecret)
+Connect-AzAccount -ServicePrincipal -Credential $pscredential
 
 Write-Host "Getting certificate..."
 
