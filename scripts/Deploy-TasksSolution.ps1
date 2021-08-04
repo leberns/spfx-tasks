@@ -32,7 +32,7 @@ Write-Host "Installing the SPFx solution..."
 $solutionPath = "./$dropPath/drop/$($spfxSolutionFileName)"
 Write-Host "SPFx solution path: $solutionPath"
 
-Add-PnPApp $solutionPath -Overwrite -Publish
+Add-PnPApp $solutionPath -Overwrite -Scope Site -Publish
 
 Write-Host "Applying the PnP template..."
 
