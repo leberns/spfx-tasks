@@ -4,7 +4,7 @@
 Write-Host "Starting solution deployment"
 
 $deployment = $env:deployment
-$siteUrl = "$env:baseSiteUrl-$deployment"
+$siteUrl = "$env:baseSiteUrl$deployment"
 $tenant = $env:tenant
 $dropPath = $env:dropPath
 $spfxSolutionFileName = $env:spfxSolutionFileName
