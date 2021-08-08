@@ -3,23 +3,26 @@ import "@pnp/sp/webs";
 import "@pnp/sp/lists";
 import "@pnp/sp/items";
 
-import { ITask, toDoItemMetadata } from "../entities/ITask";
+import { ITask, taskMetadata } from "../entities/ITask";
 import { IListService } from "./IListService";
 import { IEntityMapper } from "../mappers/IEntityMapper";
 import { ListItemToEntityMapper } from "../mappers/ListItemToEntityMapper";
+import { FieldTypes } from "@pnp/sp/fields/types";
 
 export class ListService implements IListService {
   constructor(private listTitle: string) { }
 
   public async fetch(): Promise<ITask[]> {
 
-    const allItems = await sp.web.lists.getByTitle(this.listTitle).items.getAll();
+    const items = await sp.web.lists.getByTitle(this.listTitle).items.getAll();
+
     const entitites = [] as ITask[];
-    const mapper: IEntityMapper<ITask> = new ListItemToEntityMapper<ITask>(toDoItemMetadata);
-    for (const item of allItems) {
+    const mapper: IEntityMapper<ITask> = new ListItemToEntityMapper<ITask>(taskMetadata);
+    for (const item of items) {
       const entity = mapper.map(item);
       entitites.push(entity);
     }
+    FieldTypes
 
     return entitites;
   }
