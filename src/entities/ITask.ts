@@ -10,7 +10,7 @@ export interface ITask extends IListItem {
 
 export const toDoItemMetadata: Record<keyof ITask, string> = {
   ...listItemMetadata,
-  status: 'ItemStatus',
-  dueDate: 'DueDate',
-  assignedUser: 'AssignedUser'
+  status: 'lbItemStatus',
+  dueDate: 'lbDueDate',
+  assignedUser: 'lbAssignedUser'
 };
