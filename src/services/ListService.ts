@@ -7,7 +7,6 @@ import { ITask, taskMetadata } from "../entities/ITask";
 import { IListService } from "./IListService";
 import { IEntityMapper } from "../mappers/IEntityMapper";
 import { ListItemToEntityMapper } from "../mappers/ListItemToEntityMapper";
-import { FieldTypes } from "@pnp/sp/fields/types";
 
 export class ListService implements IListService {
   constructor(private listTitle: string) { }
@@ -22,7 +21,6 @@ export class ListService implements IListService {
       const entity = mapper.map(item);
       entitites.push(entity);
     }
-    FieldTypes
 
     return entitites;
   }
