@@ -1,9 +1,9 @@
 import * as React from "react";
-import { FunctionComponent, useContext, useState, useEffect } from 'react';
+import { FunctionComponent, useState, useEffect } from 'react';
 
-import AppContext from "../../../appContext/AppContext";
+import { useAppContext } from "../../../appContext/AppContext";
 import { ITask } from "../../../entities/ITask";
-import ErrorViewer from "../../../errorViewer/ErrorViewer";
+import ErrorViewer from "../../../errors/errorViewer/ErrorViewer";
 import { ListService } from "../../../services/ListService";
 import TaskEditor from "../taskEditor/TaskEditor";
 import TasksViewer from "../tasksViewer/TasksViewer";
@@ -11,9 +11,9 @@ import { ITasksProviderProps } from "./ITasksProviderProps";
 
 const TasksProvider: FunctionComponent<ITasksProviderProps> = () => {
 
-  const appContext = useContext(AppContext);
-  const [tasks, setTasks] = useState([] as ITask[]);
+  const appContext = useAppContext();
   const [error, setError] = useState(null);
+  const [tasks, setTasks] = useState([] as ITask[]);
   const [selectedTask, setSelectedTask] = useState(null as ITask);
 
   useEffect(() => {

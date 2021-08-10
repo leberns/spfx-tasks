@@ -1,13 +1,16 @@
 import { IEntityMapper } from "./IEntityMapper";
+import { IField } from "../fields/IField";
+import { ExtendedFieldTypes } from "../fields/ExtendedFieldTypes";
 
 export class ListItemToEntityMapper<TEntity> implements IEntityMapper<TEntity> {
   private internalNameToPropertyName: Record<string, keyof TEntity> = {};
 
-  constructor(private metadata: Record<keyof TEntity, string>) {
+  constructor(private metadata: Record<keyof TEntity, IField>) {
     const properties = Object.keys(this.metadata);
-    properties.forEach(property => {
-      const internalName = this.metadata[property];
-      this.internalNameToPropertyName[internalName] = property as keyof TEntity;
+
+    properties.forEach((propertyName: string) => {
+      const { internalName } = this.metadata[propertyName] as IField;
+      this.internalNameToPropertyName[internalName] = propertyName as keyof TEntity;
     });
   }
 
@@ -18,10 +21,11 @@ export class ListItemToEntityMapper<TEntity> implements IEntityMapper<TEntity> {
     for (const internalName of internalNames) {
       const fieldValue = listItem[internalName];
       const propertyName = this.internalNameToPropertyName[internalName];
+      const field = this.metadata[propertyName];
       if (propertyName === undefined) {
         continue;
       }
-      if (propertyName === 'dueDate') {
+      if (field.type === ExtendedFieldTypes.DateTime) {
         entity[propertyName] = new Date(fieldValue) as any;
       } else {
         entity[propertyName] = fieldValue;
