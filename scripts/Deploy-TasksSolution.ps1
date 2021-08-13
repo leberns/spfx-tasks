@@ -1,7 +1,7 @@
 # Deploy the SPFx Tasks client solution and apply the PnP template
 # The PnP connection to the site is made through a certificate
 
-param($pnpAzureBase64Certificate)
+param($pnpAzureClientId)
 
 Write-Host "Starting solution deployment"
 
@@ -11,17 +11,15 @@ $tenant = $env:tenant
 $dropPath = $env:dropPath
 $spfxSolutionFileName = $env:spfxSolutionFileName
 $pnpTemplateFileName = $env:pnpTemplateFileName
-$clientId = $env:clientId
-$certificateBase64 = $env:certificateBase64
-$pnpBase64CertificateSecret = $env:pnpBase64CertificateSecret 
+$clientId = $pnpAzureClientId
+$certificateBase64 = $env:pnpBase64CertificateSecret 
 
 Write-Host "Deployment:                 $deployment"
 Write-Host "Site URL:                   $siteUrl"
 Write-Host "SPFx solution file name:    $spfxSolutionFileName"
 Write-Host "Template file name:         $pnpTemplateFileName"
+Write-Host "PnP app client Id lenght:   $($clientId.Length)"
 Write-Host "PnP app base 64 certificate lenght: $($certificateBase64.Length)"
-Write-Host "PnP app base 64 certificate lenght (param): $($pnpAzureBase64Certificate.Length)"
-Write-Host "PnP app base 64 certificate lenght (Key Vault): $($pnpBase64CertificateSecret.Length)"
 
 Write-Host "Installing PnP PowerShell..."
 
