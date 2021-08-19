@@ -1,10 +1,43 @@
-# Tasks
+# SPFx Tasks
 
 ## Summary
 
-A SPFx Tasks web part with function components, hooks and context API.
+A SPFx Tasks web part to display tasks from a custom list.
 
-## Used SharePoint Framework Version
+![Tasks displaying](./docs/tasks-displaying-basic.png)
+
+## Features
+
+* React function components
+* React hooks
+* React context API
+
+* [Azure DevOps with SharePoint](https://github.com/leberns/spfx-tasks/wiki/Azure-DevOps-with-SharePoint)
+
+Example of a successful release:  
+[Release pipeline success](https://github.com/leberns/spfx-tasks/wiki/DevOps-with-SharePoint/90-Release-pipeline-execution.png)
+
+* [ErrorViewer](./src/errors/errorViewer/ErrorViewer.tsx) component to display PnPJs errors nicely
+
+Response error example:  
+```JSON
+{
+    "odata.error": {
+        "code": "-1, System.ArgumentException",
+        "message": {
+            "lang": "en-US",
+            "value": "List 'Tasks' does not exist at site with URL 'https://YOUR-TENANT.sharepoint.com/sites/tasks-dev'."
+        }
+    }
+}
+```
+
+ErrorViewer component output:
+![ErrorViewer example](./docs/error-viewer-example.png)
+
+* Entity mapping - map internal field names -> friendly property names and metadata, ex.: lbItemStatus -> status, choice field. See [entities/](./src/entities/), [mappers/](./src/mappers/)
+
+## SharePoint Framework Version
 
 1.12.1
 
@@ -12,7 +45,7 @@ A SPFx Tasks web part with function components, hooks and context API.
 
 Version|Date|Comments
 -------|----|--------
-1.0|12.06.2021|Initial release
+0.1|12.06.2021|Initial release - display items
 
 ## Disclaimer
 
@@ -30,8 +63,6 @@ Version|Date|Comments
 
 ## References
 
-- https://coreyroth.com/2021/01/20/how-to-use-pnp-powershell-to-deploy-sharepoint-apps-with-azure-devops/
-- https://azuredevopslabs.com/labs/vstsextend/azurekeyvault/
-- https://docs.microsoft.com/en-us/sharepoint/dev/general-development/site-collection-app-catalog
-- https://techcommunity.microsoft.com/t5/microsoft-365-pnp-blog/getting-started-with-azure-shell-and-pnp-powershell-with/ba-p/2315482
-
+- [How to use React Context effectively](https://kentcdodds.com/blog/how-to-use-react-context-effectively)
+- [Application State Management with React](https://kentcdodds.com/blog/application-state-management-with-react)
+- [The modern guide to React state patterns](https://blog.logrocket.com/modern-guide-react-state-patterns/)
