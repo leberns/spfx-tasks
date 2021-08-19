@@ -73,7 +73,7 @@ A new Azure AD Application is created, the administrator has to give consent and
 
 The `$app` variable of the script `Register-PnPApp.ps1` has information about the application registration.
 
-Make note of the client Id as available from `$app.'AzureAppId/ClientId'`
+Make note of the client Id as available from `$app.'AzureAppId/ClientId'`.  The client Id is also the `PnPAzureDevOps` application Id available under `Enterprise applications` in Azure portal.
 
 The private key of the certificate encoded as base 64 is stored in a local file: `certificates\PnPAzureDevOps-Base64Encoded.txt`.
 
@@ -107,7 +107,7 @@ Under `Secrets` click on `Generate/Import` and name the secret `PnPAzureClientId
 
 The pipeline has to have access to the key vault, otherwise the tasks fail to get the secrets.
 
-A security principal is created automatically during the pipeline configuration, for details refer to "Task 1: Creating a service principal" under [Authentication](https://pnp.github.io/powershell/articles/authentication.html).
+A security principal is created automatically during the pipeline configuration, for details refer to "Task 1: Creating a service principal" under [Using secrets from Azure Key Vault in a pipeline](https://azuredevopslabs.com/labs/vstsextend/azurekeyvault/).
 
 Grant access to this security principal under `Access policies` > `Add Access Policy`:
 
