@@ -12,9 +12,7 @@ A SPFx Tasks web part to display tasks from a custom list.
 * React hooks
 * React context API
 
-* [Azure DevOps with SharePoint](https://github.com/leberns/spfx-tasks/wiki/Azure-DevOps-with-SharePoint)
-
-Example of a successful release:  
+* [Azure DevOps with SharePoint](https://github.com/leberns/spfx-tasks/wiki/Azure-DevOps-with-SharePoint) - example of a successful release:  
 ![Release pipeline success](https://github.com/leberns/spfx-tasks/wiki/devops-with-sharepoint/90-Release-pipeline-execution.png)
 
 * [ErrorViewer](./src/errors/errorViewer/ErrorViewer.tsx) component to display PnPJs errors nicely
