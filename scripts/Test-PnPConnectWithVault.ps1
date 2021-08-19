@@ -1,3 +1,4 @@
+# test the conection to SharePoint loading the certificate of the PnP app from the Key Vault
 
 param($clientId) # the PnPAzureDevOps application Id under Enterprise applications in Azure portal
 

@@ -1,4 +1,4 @@
-﻿# https://docs.microsoft.com/en-us/sharepoint/dev/general-development/site-collection-app-catalog
+﻿# enable the app catalog at site the collection
 
 Connect-PnPOnline https://adessoleandrobernsmueller.sharepoint.com/ -Credentials (Get-Credential)
 
