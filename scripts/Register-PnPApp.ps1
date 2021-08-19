@@ -1,4 +1,4 @@
-﻿# perform the PnP app registrations on Azure
+﻿# perform the PnP app registration on Azure
 
 # update according to the local folder where your sources are located
 Set-Location C:\Dev\GitHub\leberns\spfx-tasks\scripts
