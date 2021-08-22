@@ -40,12 +40,24 @@ const TasksProvider: FunctionComponent<ITasksProviderProps> = () => {
     setSelectedTask(task);
   }
 
+  function onChangedProperty(value: string | Date, propertyName: keyof ITask): void {
+    const change: ITask = {
+      ...selectedTask,
+      [propertyName]: value,
+    };
+    console.log(propertyName, value, change);
+  }
+
   return (
     <ErrorViewer error={error}>
       <TasksViewer
         tasks={tasks}
-        onSelectedTaskChanged={onSelectedTaskChanged} />
-      <TaskEditor task={selectedTask} />
+        onSelectedTaskChanged={onSelectedTaskChanged}
+      />
+      <TaskEditor
+        task={selectedTask}
+        onChangedProperty={onChangedProperty}
+      />
     </ErrorViewer>
   );
 };

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { FunctionComponent, useState, useEffect } from "react";
 import { DatePicker, Dropdown, IDropdownOption, TextField } from "office-ui-fabric-react";
+import * as _ from "lodash";
 
 import { ITaskEditorProps } from "./ITaskEditorProps";
 import { ITask } from "../../../entities/ITask";
@@ -18,7 +19,7 @@ const TaskEditor: FunctionComponent<ITaskEditorProps> = (props) => {
   });
 
   useEffect(() => {
-    const task = props.task ?? {} as ITask;
+    const task = _.cloneDeep(props.task) ?? {} as ITask;
     setChangedTask(task);
   }, [props.task]);
 
@@ -28,25 +29,17 @@ const TaskEditor: FunctionComponent<ITaskEditorProps> = (props) => {
 
   return (
     <div>
-      <TextField label='Task' value={changedTask.title} onChange={event => onChangeTask((event.target as any).value, 'title')} />
-      <Dropdown label='Status' options={options} selectedKey={changedTask.status} onChange={(event, item) => onChangeTask(item.text, 'status')} />
+      <TextField label='Task' value={changedTask.title} onChange={event => props.onChangedProperty((event.target as any).value, 'title')} />
+      <Dropdown label='Status' options={options} selectedKey={changedTask.status} onChange={(event, item) => props.onChangedProperty(item.text, 'status')} />
       <DatePicker label='Due Date'
         value={changedTask.dueDate}
-        onSelectDate={date => onChangeTask(date, 'dueDate')}
+        onSelectDate={date => props.onChangedProperty(date, 'dueDate')}
         formatDate={(date: Date): string =>
           date.toLocaleDateString()
         }>
       </DatePicker>
     </div>
   );
-
-  function onChangeTask(value: string | Date, propertyName: keyof ITask): void {
-    const change: ITask = {
-      ...changedTask,
-      [propertyName]: value
-    };
-    setChangedTask(change);
-  }
 };
 
 export default TaskEditor;
