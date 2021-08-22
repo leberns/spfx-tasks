@@ -14,21 +14,23 @@ const TasksViewer: FunctionComponent<ITasksViewerProps> = (props) => {
       isResizable: true,
       sorting: true,
       minWidth: 100,
-      maxWidth: 200
+      maxWidth: 300
     },
     {
       name: 'status',
       displayName: 'Status',
       isResizable: true,
       sorting: true,
-      minWidth: 100,
+      minWidth: 50,
+      maxWidth: 70,
     },
     {
       name: 'dueDate',
       displayName: 'Due Date',
       isResizable: true,
       sorting: true,
-      minWidth: 100,
+      minWidth: 50,
+      maxWidth: 70,
       render: onRenderDueDate,
     },
     {
@@ -36,7 +38,8 @@ const TasksViewer: FunctionComponent<ITasksViewerProps> = (props) => {
       displayName: 'Assigned To',
       isResizable: true,
       sorting: true,
-      minWidth: 100,
+      minWidth: 50,
+      maxWidth: 200,
     },
   ];
 
@@ -50,6 +53,12 @@ const TasksViewer: FunctionComponent<ITasksViewerProps> = (props) => {
         selection={onSelectedTaskChanged} />
     </div>);
 
+  function onRenderDueDate(row: any, index: number): JSX.Element {
+    const task = props.tasks[index];
+    const date = task.dueDate?.toLocaleDateString();
+    return <span>{date}</span>;
+  }
+
   function onSelectedTaskChanged(items: ITask[]): void {
     if (items.length === 0) {
       props.onSelectedTaskChanged(null);
@@ -58,12 +67,6 @@ const TasksViewer: FunctionComponent<ITasksViewerProps> = (props) => {
     const item = items[0];
     const task = props.tasks.filter(t => t.id === item.id)[0];
     props.onSelectedTaskChanged(task);
-  }
-
-  function onRenderDueDate(row: any, index: number): JSX.Element {
-    const task = props.tasks[index];
-    const date = task.dueDate?.toLocaleDateString();
-    return <span>{date}</span>;
   }
 };
 
