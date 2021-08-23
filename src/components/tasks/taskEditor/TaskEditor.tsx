@@ -23,14 +23,11 @@ const TaskEditor: FunctionComponent<ITaskEditorProps> = (props) => {
     setChangedTask(task);
   }, [props.task]);
 
-  const debouncedOnChangedProperty = useCallback(
-    _.debounce((event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      const value = (event.target as any).value;
-      console.log(`props.onChangedProperty title: ${value}`);
-      props.onChangedProperty(value, 'title');
-    }, 500),
-    [props.onChangedProperty]
-  );
+  const onChangedTitle = (value: string) => {
+    const task = _.cloneDeep(changedTask);
+    task.title = value;
+    setChangedTask(task);
+  };
 
   if (props.task === null) {
     return null;
@@ -38,7 +35,11 @@ const TaskEditor: FunctionComponent<ITaskEditorProps> = (props) => {
 
   return (
     <div>
-      <TextField label='Task' value={changedTask.title} onChange={debouncedOnChangedProperty} />
+      <TextField label='Task'
+        value={changedTask.title}
+        onChange={event => onChangedTitle((event.target as any).value)}
+        onBlur={() => props.onChangedProperty(changedTask.title, 'title')}
+      />
       <Dropdown label='Status' options={possibleStatus} selectedKey={changedTask.status} onChange={(event, item) => props.onChangedProperty(item.text, 'status')} />
       <DatePicker label='Due Date'
         value={changedTask.dueDate}

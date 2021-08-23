@@ -4,11 +4,11 @@ import { FunctionComponent, useState, useEffect } from 'react';
 import { ITasksProviderProps } from "./ITasksProviderProps";
 import { useAppContext } from "../../../appContext/AppContext";
 import { ITask } from "../../../entities/ITask";
+import { PartialEntity } from "../../../entities/PartialEntity";
 import { ListService } from "../../../services/ListService";
 import ErrorViewer from "../../../errors/errorViewer/ErrorViewer";
 import TaskEditor from "../taskEditor/TaskEditor";
 import TasksViewer from "../tasksViewer/TasksViewer";
-import { PartialEntity } from "../../../entities/PartialEntity";
 
 const TasksProvider: FunctionComponent<ITasksProviderProps> = () => {
 
@@ -41,14 +41,19 @@ const TasksProvider: FunctionComponent<ITasksProviderProps> = () => {
     setSelectedTask(task);
   }
 
-  function onChangedProperty(value: string | Date, propertyName: keyof ITask): void {
+  const onChangedProperty = (value: string | Date, propertyName: keyof ITask): void => {
+    const currentValue = selectedTask[propertyName];
+    if (currentValue === value) {
+      return;
+    }
+
     const id = selectedTask.id;
     const change: PartialEntity<ITask> = {
       id,
       [propertyName]: value,
     };
     tryUpdate(change);
-  }
+  };
 
   async function tryUpdate(change: PartialEntity<ITask>): Promise<void> {
     try {
