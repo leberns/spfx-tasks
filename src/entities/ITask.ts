@@ -1,4 +1,5 @@
 import { TaskStatus } from '../enums/TaskStatus';
+import { IEntity } from './IEntity';
 import { IListItem, listItemMetadata } from './IListItem';
 import { IField } from '../fields/IField';
 import { IUser } from '../interfaces/IUser';
@@ -10,7 +11,7 @@ export interface ITask extends IListItem {
   assignedUser: IUser;
 }
 
-export const taskMetadata: Record<keyof ITask, IField> = {
+export const taskMetadata: Record<keyof Omit<ITask, keyof IEntity>, IField> = {
   ...listItemMetadata,
   status: {
     internalName: 'lbItemStatus',

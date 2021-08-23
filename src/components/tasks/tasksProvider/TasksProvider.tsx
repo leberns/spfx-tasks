@@ -1,13 +1,14 @@
 import * as React from "react";
 import { FunctionComponent, useState, useEffect } from 'react';
 
+import { ITasksProviderProps } from "./ITasksProviderProps";
 import { useAppContext } from "../../../appContext/AppContext";
 import { ITask } from "../../../entities/ITask";
-import ErrorViewer from "../../../errors/errorViewer/ErrorViewer";
 import { ListService } from "../../../services/ListService";
+import ErrorViewer from "../../../errors/errorViewer/ErrorViewer";
 import TaskEditor from "../taskEditor/TaskEditor";
 import TasksViewer from "../tasksViewer/TasksViewer";
-import { ITasksProviderProps } from "./ITasksProviderProps";
+import { PartialEntity } from "../../../entities/PartialEntity";
 
 const TasksProvider: FunctionComponent<ITasksProviderProps> = () => {
 
@@ -41,11 +42,24 @@ const TasksProvider: FunctionComponent<ITasksProviderProps> = () => {
   }
 
   function onChangedProperty(value: string | Date, propertyName: keyof ITask): void {
-    const change: ITask = {
-      ...selectedTask,
+    const id = selectedTask.id;
+    const change: PartialEntity<ITask> = {
+      id,
       [propertyName]: value,
     };
-    console.log(propertyName, value, change);
+    tryUpdate(change);
+  }
+
+  async function tryUpdate(change: PartialEntity<ITask>): Promise<void> {
+    try {
+      const listService = new ListService(appContext.listTitle);
+      await listService.update(change);
+      const entities = await listService.fetch();
+      setTasks(entities);
+    }
+    catch (e) {
+      setError(e);
+    }
   }
 
   return (
