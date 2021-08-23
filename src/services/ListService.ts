@@ -33,7 +33,5 @@ export class ListService implements IListService {
 
     const list = sp.web.lists.getByTitle(this.listTitle);
     const res = await list.items.getById(task.id).update(listItem);
-
-    console.log('updated', listItem, res);
   }
 }

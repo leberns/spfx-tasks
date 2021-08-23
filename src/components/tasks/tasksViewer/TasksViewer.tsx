@@ -4,6 +4,7 @@ import { ListView, IViewField, SelectionMode } from "@pnp/spfx-controls-react/li
 
 import { ITasksViewerProps } from './ITasksViewerProps';
 import { ITask } from '../../../entities/ITask';
+import { PartialEntity } from '../../../entities/PartialEntity';
 
 const TasksViewer: FunctionComponent<ITasksViewerProps> = (props) => {
 
@@ -22,7 +23,7 @@ const TasksViewer: FunctionComponent<ITasksViewerProps> = (props) => {
       isResizable: true,
       sorting: true,
       minWidth: 50,
-      maxWidth: 70,
+      maxWidth: 80,
     },
     {
       name: 'dueDate',
@@ -30,16 +31,8 @@ const TasksViewer: FunctionComponent<ITasksViewerProps> = (props) => {
       isResizable: true,
       sorting: true,
       minWidth: 50,
-      maxWidth: 70,
+      maxWidth: 80,
       render: onRenderDueDate,
-    },
-    {
-      name: 'assignedUser',
-      displayName: 'Assigned To',
-      isResizable: true,
-      sorting: true,
-      minWidth: 50,
-      maxWidth: 200,
     },
   ];
 
@@ -48,13 +41,13 @@ const TasksViewer: FunctionComponent<ITasksViewerProps> = (props) => {
       <ListView
         items={props.tasks}
         viewFields={viewFields}
-        compact={true}
         selectionMode={SelectionMode.single}
         selection={onSelectedTaskChanged} />
     </div>);
 
-  function onRenderDueDate(row: any, index: number): JSX.Element {
-    const task = props.tasks[index];
+  function onRenderDueDate(rowTask: PartialEntity<ITask>, index: number): JSX.Element {
+    console.log(`onRenderDueDate ${index}`, rowTask);
+    const task = props.tasks.filter(t => t.id === rowTask.id)[0];
     const date = task.dueDate?.toLocaleDateString();
     return <span>{date}</span>;
   }
