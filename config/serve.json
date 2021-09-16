@@ -11,5 +11,6 @@
       "pageUrl": "https://adessoleandrobernsmueller.sharepoint.com/sites/tasks-dev/SitePages/Tasks.aspx",
       "customActions": {}
     }
-  }
+  },
+  "initialPage": "https://localhost:5432/workbench"
 }

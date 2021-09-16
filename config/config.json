@@ -9,11 +9,20 @@
           "manifest": "./src/webparts/tasks/TasksWebPart.manifest.json"
         }
       ]
+    },
+    "hooks-lab-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/hooksLab/HooksLabWebPart.js",
+          "manifest": "./src/webparts/hooksLab/HooksLabWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
     "TasksWebPartStrings": "lib/webparts/tasks/loc/{locale}.js",
-    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js"
+    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js",
+    "HooksLabWebPartStrings": "lib/webparts/hooksLab/loc/{locale}.js"
   }
 }

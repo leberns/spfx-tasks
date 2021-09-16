@@ -9,6 +9,7 @@ export interface ITask extends IListItem {
   status: TaskStatus;
   dueDate: Date;
   assignedUser: IUser;
+  estimatedEffort: number;
 }
 
 export const taskMetadata: Record<keyof Omit<ITask, keyof IEntity>, IField> = {
@@ -24,5 +25,9 @@ export const taskMetadata: Record<keyof Omit<ITask, keyof IEntity>, IField> = {
   assignedUser: {
     internalName: 'lbAssignedUser',
     type: ExtendedFieldTypes.User
+  },
+  estimatedEffort: {
+    internalName: 'lbEstimatedEffort',
+    type: ExtendedFieldTypes.Integer
   }
 };
